@@ -70,11 +70,13 @@ public class UiApplication {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.formLogin().and().logout().and().authorizeRequests()
-					.antMatchers("/index.html", "/home.html", "/login.html", "/").permitAll().anyRequest()
-					.authenticated().and().csrf()
-					.csrfTokenRepository(csrfTokenRepository()).and()
-					.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
+			http.formLogin()
+                    .and().logout()
+                    .and().authorizeRequests().antMatchers("/index.html", "/home.html", "/login.html", "/", "/admin/*.js").permitAll()
+                    .and().authorizeRequests().antMatchers("/admin/*.html").hasAuthority("ADMIN")
+                    .anyRequest().authenticated()
+                    .and().csrf().csrfTokenRepository(csrfTokenRepository())
+                    .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
 		}
 
         @Override

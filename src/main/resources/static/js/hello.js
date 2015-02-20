@@ -6,7 +6,11 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider) {
 	}).when('/login', {
 		templateUrl : 'login.html',
 		controller : 'navigation'
-	}).otherwise('/');
+	}).when('/admin/users', {
+        templateUrl : 'admin/users.html',
+        controller: 'UsersController',
+        controllerAs: 'usersCtrl'
+    }).otherwise('/');
 
 }).controller('navigation',
 
