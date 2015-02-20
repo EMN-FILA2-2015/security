@@ -1,3 +1,17 @@
 logging:
   level:
     org.springframework.security: DEBUG
+
+spring:
+  data:
+    mongodb:
+      host: localhost # Mongo server host
+      port: 27017 # Mongo server port (defaults to 27107)
+      #uri: mongodb://localhost/demo # Mmongo database URI. When set, host and port are ignored.
+      database: demo # Database name.
+      authentication-database: # Authentication database name.
+      grid-fs-database: # GridFS database name.
+      username: # Login user of the mongo server.
+      password: # Login password of the mongo server.
+      repositories:
+        enabled: true # if spring data repository support is enabled

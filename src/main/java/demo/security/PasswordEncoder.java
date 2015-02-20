@@ -1,4 +1,4 @@
-package demo;
+package demo.security;
 
 import org.springframework.stereotype.Component;
 

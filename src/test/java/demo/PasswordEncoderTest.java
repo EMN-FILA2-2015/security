@@ -1,5 +1,6 @@
 package demo;
 
+import demo.security.PasswordEncoder;
 import org.junit.Assert;
 import org.junit.Test;
 

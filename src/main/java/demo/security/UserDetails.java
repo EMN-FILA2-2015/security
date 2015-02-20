@@ -1,12 +1,13 @@
-package demo;
+package demo.security;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
-    private Collection<? extends GrantedAuthority> authorities;
+    private Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
     private String password;
     private String username;
     private boolean accountNonExpired;
@@ -14,12 +15,16 @@ public class UserDetails implements org.springframework.security.core.userdetail
     private boolean credentialsNonExpired;
     private boolean enabled;
 
+    public void addAuthorities(GrantedAuthority grantedAuthority) {
+        this.authorities.add(grantedAuthority);
+    }
+
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<GrantedAuthority> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+    public void setAuthorities(Collection<GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 
