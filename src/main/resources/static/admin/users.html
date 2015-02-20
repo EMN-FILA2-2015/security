@@ -1,1 +1,41 @@
-Users : {{usersCtrl.users}}
+<div class="users">
+    <h1>Users</h1>
+    <div class="users-list">
+        <h2>Users list</h2>
+        <ul>
+            <li class="animate-repeat" ng-repeat="user in usersCtrl.users">
+                <a ng-click="usersCtrl.editUser(user.login)">{{user.login}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="users-edit">
+        <h2>Edit user</h2>
+        <div ng-if="usersCtrl.user != null">
+            <div>
+                <label>Login</label>
+                {{usersCtrl.user.login}}
+            </div>
+            <div>
+                <label>Mail</label>
+                <input type="text" ng-model="usersCtrl.user.mail" />
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="text" ng-model="usersCtrl.user.password" />
+            </div>
+            <div>
+                <label>Roles</label>
+                <ul>
+                    <li ng-repeat="(role, checked) in usersCtrl.userRoles">
+                        <input type="checkbox" id="{{'role'+role}}"
+                               ng-model="usersCtrl.userRoles[role]" />
+                        <label for="{{'role'+role}}">{{role}}</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="buttons">
+                <input type="button" value="Save" ng-click="usersCtrl.saveUser(usersCtrl.user, usersCtrl.userRoles)" />
+            </div>
+        </div>
+    </div>
+</div>

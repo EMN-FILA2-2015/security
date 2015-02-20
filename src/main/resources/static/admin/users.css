@@ -1,0 +1,23 @@
+.users > * {
+    margin: 0; padding: 0;
+}
+
+.users .users-list {
+    display: inline-block;
+    vertical-align: top;
+    width: 350px;
+}
+
+.users .users-edit {
+    display: inline-block;
+    vertical-align: top;
+    width: 500px;
+}
+
+.users .users-edit label {
+    width: 150px;
+}
+
+.users .users-edit .buttons {
+    text-align: center;
+}

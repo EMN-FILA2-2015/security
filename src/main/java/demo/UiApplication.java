@@ -73,7 +73,7 @@ public class UiApplication {
 			http.formLogin()
                     .and().logout()
                     .and().authorizeRequests().antMatchers("/index.html", "/home.html", "/login.html", "/").permitAll()
-                    .and().authorizeRequests().antMatchers("/admin/*.html", "/admin/*.js").hasAuthority("ADMIN")
+                    .and().authorizeRequests().antMatchers("/admin/*.html", "/admin/*.js", "/admin/*.css").hasAuthority("ADMIN")
                     .anyRequest().authenticated()
                     .and().csrf().csrfTokenRepository(csrfTokenRepository())
                     .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
