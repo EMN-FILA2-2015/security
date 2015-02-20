@@ -1,5 +1,10 @@
 # Sample Security on Application
 
+* Clone this :
 ```
 git clone https://github.com/EMN-FILA2-2015/security.git
-mvn spring-boot:run```
+```
+* Run :
+```
+mvn spring-boot:run
+```
