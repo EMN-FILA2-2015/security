@@ -1,27 +1,28 @@
 package demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.Collection;
 
 @Component(value="userDetailsService")
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 
-        UserDetailsBean userDetails = new UserDetailsBean();
+        UserDetails userDetails = new UserDetails();
 
         // TODO Get user data from database
 
         userDetails.setEnabled(true);
         userDetails.setUsername("admin");
-        userDetails.setPassword("password");
+        userDetails.setPassword(passwordEncoder.encode("password"));
         userDetails.setAuthorities(Arrays.asList(new GrantedAuthority() {
             @Override
             public String getAuthority() {

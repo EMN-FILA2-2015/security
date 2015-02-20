@@ -1,5 +1,7 @@
 package demo;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -7,7 +9,19 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Encrypt passwords
  */
-public class PasswordEncoder {
+@Component
+public class PasswordEncoder implements org.springframework.security.crypto.password.PasswordEncoder {
+
+    @Override
+    public String encode(CharSequence charSequence) {
+        return this.encode(charSequence.toString());
+    }
+
+    @Override
+    public boolean matches(CharSequence charSequence, String s) {
+        String encryptedPassword = this.encode(charSequence);
+        return s.equals(encryptedPassword);
+    }
 
     /**
      * Encrypt passwords.
@@ -27,12 +41,10 @@ public class PasswordEncoder {
         MessageDigest messageDigest=null;
         try {
             messageDigest = MessageDigest.getInstance("SHA");
-            messageDigest.update(uncryptedPassword.getBytes());
+            return byteArrayToHexString(messageDigest.digest(uncryptedPassword.getBytes()));
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        String encryptedPassword = (new BigInteger(messageDigest.digest())).toString(16);
-        return encryptedPassword;
     }
 
     /**
@@ -44,11 +56,24 @@ public class PasswordEncoder {
         MessageDigest messageDigest=null;
         try {
             messageDigest = MessageDigest.getInstance("MD5");
-            messageDigest.update(uncryptedPassword.getBytes());
+            return byteArrayToHexString(messageDigest.digest(uncryptedPassword.getBytes()));
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        String encryptedPassword = (new BigInteger(messageDigest.digest())).toString(16);
-        return encryptedPassword;
     }
+
+    /**
+     * Convert encoding result to String.
+     * @param b bytes
+     * @return String
+     */
+    private static String byteArrayToHexString(byte[] b) {
+        StringBuffer result = new StringBuffer();
+        for (int i=0; i < b.length; i++) {
+            result.append(
+                    Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 ));
+        }
+        return result.toString();
+    }
+
 }
