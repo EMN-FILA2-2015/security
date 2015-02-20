@@ -72,8 +72,8 @@ public class UiApplication {
 		protected void configure(HttpSecurity http) throws Exception {
 			http.formLogin()
                     .and().logout()
-                    .and().authorizeRequests().antMatchers("/index.html", "/home.html", "/login.html", "/", "/admin/*.js").permitAll()
-                    .and().authorizeRequests().antMatchers("/admin/*.html").hasAuthority("ADMIN")
+                    .and().authorizeRequests().antMatchers("/index.html", "/home.html", "/login.html", "/").permitAll()
+                    .and().authorizeRequests().antMatchers("/admin/*.html", "/admin/*.js").hasAuthority("ADMIN")
                     .anyRequest().authenticated()
                     .and().csrf().csrfTokenRepository(csrfTokenRepository())
                     .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
