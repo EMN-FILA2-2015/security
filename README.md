@@ -17,3 +17,5 @@ mvn test
 ```
 mvn spring-boot:run
 ```
+* Go to : 
+http://localhost:8080
